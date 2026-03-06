@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMAN 7 Poco Ranaka - Berkarakter, Berprestasi, Berintegritas</title>
+    <meta name="description" content="Website Resmi SMA Negeri 7 Poco Ranaka - Sekolah unggulan dengan pendidikan berkualitas">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e40af;
+            --secondary: #7c3aed;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-top {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .school-name h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .school-name p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        nav {
+            background: rgba(255,255,255,0.1);
+            margin-top: 1rem;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-menu li a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 0.8rem 1.2rem;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.9), rgba(124, 58, 237, 0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23e0e7ff" width="1200" height="600"/><path fill="%23c7d2fe" d="M0 300L50 283.3C100 266.7 200 233.3 300 225C400 216.7 500 233.3 600 241.7C700 250 800 250 900 241.7C1000 233.3 1100 216.7 1150 208.3L1200 200V600H1150C1100 600 1000 600 900 600C800 600 700 600 600 600C500 600 400 600 300 600C200 600 100 600 50 600H0V300Z"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s 0.2s both;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            animation: fadeInUp 1s 0.4s both;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Content Sections */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* News/Publications */
+        .news-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .news-item:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            transform: translateX(5px);
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 1rem;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .news-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .news-item h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .news-category {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            background: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Gallery */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            padding-top: 75%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: start;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .contact-info i {
+            color: var(--accent);
+            margin-top: 0.2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .nav-menu {
+                flex-direction: column;
+            }
+
+            .nav-menu li a {
+                padding: 0.6rem 1rem;
+            }
+        }
+
+        /* Loading Indicator */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: var(--primary);
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-top">
+            <div class="logo-section">
+                <div class="box">
+                     <img src="/asset/logo/logo.jpeg">
+                    <div class="school-name">
+                    <h1>SMAN 7 Poco Ranaka</h1>
+                    <p>Berkarakter, Berprestasi, Berintegritas</p>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="nav-container">
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" data-page="beranda">Beranda</a></li>
+                    <li><a href="#" class="nav-link" data-page="profil">Profil</a></li>
+                    <li><a href="#" class="nav-link" data-page="publikasi">Publikasi</a></li>
+                    <li><a href="#" class="nav-link" data-page="fasilitas">Fasilitas</a></li>
+                    <li><a href="#" class="nav-link" data-page="prestasi">Prestasi</a></li>
+                    <li><a href="https://photos.app.goo.gl/3fSvE9m5DiXE2D9V6" class="nav-link" data-page="galeri">Galeri</a></li>
+                    <li><a href="https://forms.gle/vHiUrorAZxZp3YLo9" class="nav-link" data-page="kontak">Formulir Pendaftaran</a></li>
+                    <li><a href="#" class="nav-link" data-page="admin">Admin</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h2>Selamat Datang di SMAN 7 Poco Ranaka</h2>
+            <p>Mencetak generasi cerdas, berakhlak mulia, dan siap menghadapi tantangan masa depan</p>
+            <a href="https://giogazpart.github.io/sman7pocoranaka/" class="btn" onclick="navigateTo('profil'); return false;">Jelajahi Sekolah Kami</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Beranda Section -->
+        <section id="beranda" class="section active">
+            <h2 class="section-title">Informasi Terkini</h2>
+            <div class="box">
+                            <h2>
+                          <p>Untuk memulai Ulangan, Silahkan Klik Menu Open Dibawah</p>
+                        <br>
+                    <a href="https://forms.gle/WKHux1jWnrZu8tdi7">Open Link</a>
+                </h2>
+                <h2 class="section-title" style="margin-top: 3rem;">Keunggulan Sekolah</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Pendidikan Berkualitas</h3>
+                    <p>Kurikulum yang terstandar dengan metode pembelajaran modern dan inovatif untuk mengembangkan potensi siswa secara maksimal.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-users"></i></div>
+                    <h3>Tenaga Pengajar Profesional</h3>
+                    <p>Guru-guru berpengalaman dan berkompeten yang senantiasa memberikan bimbingan terbaik kepada siswa.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-building"></i></div>
+                    <h3>Fasilitas Lengkap</h3>
+                    <p>Sarana dan prasarana yang memadai untuk mendukung proses belajar mengajar yang efektif dan nyaman.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Profil Section -->
+        <section id="profil" class="section">
+            <h2 class="section-title">Profil Sekolah</h2>
+            <div class="card">
+                <h3>Visi</h3>
+                <p>"Terwujudnya peserta didik yang beriman, bertaqwa, berakhlak mulia, cerdas, terampil, mandiri, dan berwawasan lingkungan"</p>
+            </div>
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Misi</h3>
+                <ul style="padding-left: 1.5rem;">
+                    <li>Menyelenggarakan pendidikan yang berkualitas dan berkarakter</li>
+                    <li>Mengembangkan potensi akademik dan non-akademik siswa</li>
+                    <li>Menciptakan lingkungan belajar yang kondusif dan menyenangkan</li>
+                    <li>Membangun kerjasama dengan berbagai pihak untuk kemajuan pendidikan</li>
+                    <li>Menanamkan nilai-nilai religius dan karakter bangsa</li>
+                </ul>
+            </div>
+            <div class="card" style="margin-top: 2rem;">
+                <h3>Sejarah Singkat</h3>
+                <p>SMAN 7 Poco Ranaka berdiri pada tahun [2014] sebagai salah satu lembaga pendidikan menengah atas terkemuka di wilayah lamba leda timur. Sekolah ini didirikan dengan tujuan memberikan akses pendidikan berkualitas bagi masyarakat sekitar dan telah menghasilkan banyak lulusan yang berprestasi.</p>
+            </div>
+        </section>
+
+        <!-- Publikasi Section -->
+        <section id="publikasi" class="section">
+            <h2 class="section-title">Publikasi & Pengumuman</h2>
+            <div id="publicationsList"></div>
+        </section>
+
+        <!-- Fasilitas Section -->
+        <section id="fasilitas" class="section">
+            <h2 class="section-title">Fasilitas Sekolah</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-book"></i></div>
+                    <h3>Perpustakaan</h3>
+                    <p>Perpustakaan modern dengan koleksi buku yang lengkap dan ruang baca yang nyaman.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-flask"></i></div>
+                    <h3>Laboratorium IPA</h3>
+                    <p>Lab Fisika, Kimia, dan Biologi dengan peralatan praktikum yang memadai.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-laptop"></i></div>
+                    <h3>Lab Komputer</h3>
+                    <p>Laboratorium komputer dengan PC terbaru dan koneksi internet cepat.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-futbol"></i></div>
+                    <h3>Lapangan Olahraga</h3>
+                    <p>Lapangan basket, voli, dan sepak bola untuk kegiatan ekstrakurikuler.</p>
+                </div>
+                
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Kantin</h3>
+                    <p>Kantin sekolah yang menyediakan makanan dan minuman sehat serta terjangkau.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prestasi Section -->
+        <section id="prestasi" class="section">
+            <h2 class="section-title">Prestasi Siswa</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-trophy"></i></div>
+                    <h3>Juara 1 Olimpiade Sains</h3>
+                    <p>Tingkat Provinsi - 2024</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-medal"></i></div>
+                    <h3>Juara 2 Lomba Debat</h3>
+                    <p>Tingkat Kabupaten - 2024</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-award"></i></div>
+                    <h3>Juara 1 Festival Band</h3>
+                    <p>Tingkat Kabupaten - 2024</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-star"></i></div>
+                    <h3>Juara 3 Karya Ilmiah</h3>
+                    <p>Tingkat Nasional - 2024</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Galeri Section -->
+        <section id="galeri" class="section">
+            <h2 class="section-title">Galeri Foto</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><i class="fas fa-image"></i></div>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-placeholder"><i class="fas fa-image"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kontak Section -->
+        <section id="kontak" class="section">
+            <h2 class="section-title">Hubungi Kami</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <h3>Alamat</h3>
+                    <p>Paleng-Benteng<br>Lambaleda Timur,Flores NTT<br>Indonesia</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-phone"></i></div>
+                    <h3>Telepon</h3>
+                    <p>+62 822 4925 9813<br>Senin - Jumat: 07:00 - 15:00</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-envelope"></i></div>
+                    <h3>Email</h3>
+                    <p>sman7pocoranaka@gmail.com</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Admin Section -->
+        <section id="admin" class="section">
+            <h2 class="section-title">Panel Admin - Kelola Publikasi</h2>
+            <div class="admin-panel">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Tambah Publikasi Baru</h3>
+                <form id="publicationForm">
+                    <div class="form-group">
+                        <label for="pubTitle">Judul</label>
+                        <input type="text" id="pubTitle" required placeholder="Masukkan judul publikasi">
+                    </div>
+                    <div class="form-group">
+                        <label for="pubCategory">Kategori</label>
+                        <select id="pubCategory" required>
+                            <option value="Pengumuman">Pengumuman</option>
+                            <option value="Berita">Berita</option>
+                            <option value="Kegiatan">Kegiatan</option>
+                            <option value="Prestasi">Prestasi</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="pubContent">Konten</label>
+                        <textarea id="pubContent" required placeholder="Tulis konten publikasi di sini..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-plus"></i> Publikasikan
+                    </button>
+                </form>
+            </div>
+
+            <div class="admin-panel">
+                <h3 style="margin-bottom: 1.5rem; color: var(--primary);">Daftar Publikasi</h3>
+                <div id="adminPublicationsList"></div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>SMAN 7 Poco Ranaka</h3>
+                <p>Sekolah unggulan yang berkomitmen untuk memberikan pendidikan berkualitas dan membentuk karakter siswa yang berintegritas.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Link Cepat</h3>
+                <ul>
+                    <li><a href="#" onclick="navigateTo('profil'); return false;">Profil Sekolah</a></li>
+                    <li><a href="#" onclick="navigateTo('publikasi'); return false;">Publikasi</a></li>
+                    <li><a href="#" onclick="navigateTo('fasilitas'); return false;">Fasilitas</a></li>
+                    <li><a href="#" onclick="navigateTo('prestasi'); return false;">Prestasi</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kontak</h3>
+                <div class="contact-info">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <p>Paleng-Benteng Rampas, Kec.Lambaleda Timur, Kab.Manggarai Timur, Flores-NTT</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-phone"></i>
+                    <p>+62 822 4925 9813</p>
+                </div>
+                <div class="contact-info">
+                    <i class="fas fa-envelope"></i>
+                    <p>sman7pocoranaka@gmail.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 SMAN 7 Poco Ranaka. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Data Storage
+        let publications = [];
+
+        // Initialize
+        function init() {
+            loadPublications();
+            renderPublications();
+            renderLatestNews();
+            setupNavigation();
+            setupForm();
+        }
+
+        // Navigation
+        function setupNavigation() {
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const page = link.getAttribute('data-page');
+                    navigateTo(page);
+                });
+            });
+        }
+
+    
